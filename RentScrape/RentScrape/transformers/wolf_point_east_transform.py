@@ -7,7 +7,7 @@ import scrapy
 
 class WolfPointEastTransform:
     def __init__(self, drop_path = None) -> None:
-        self.drop_path = drop_path if drop_path else f"{os.getcwd()}/drop/{datetime.datetime.now().strftime('%Y-%m-%d')}/"
+        self.drop_path = drop_path if drop_path else f"{os.getcwd()}/RentScrape/drop/wolf_point_east/{datetime.datetime.now().strftime('%Y-%m-%d')}/"
 
     def grab_files(self) -> list[pd.DataFrame]:
         files = [file.path for file in os.scandir(self.drop_path) if file.is_file()]

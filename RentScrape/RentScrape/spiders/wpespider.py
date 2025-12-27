@@ -1,9 +1,7 @@
-from collections.abc import Iterable
 import datetime
 import os
 from typing import Any
 import scrapy
-import pandas as pd
 
 
 class WolfPointEastSpider(scrapy.Spider):
@@ -12,7 +10,7 @@ class WolfPointEastSpider(scrapy.Spider):
 
     def __init__(self, name: str | None = None, **kwargs: Any):
         super().__init__(name, **kwargs)
-        self.drop_path = f"{os.getcwd()}/drop/{datetime.datetime.now().strftime('%Y-%m-%d')}"
+        self.drop_path = f"{os.getcwd()}/drop/wolf_point_east/{datetime.datetime.now().strftime('%Y-%m-%d')}"
         if not os.path.exists(self.drop_path):
             os.mkdir(self.drop_path)
         self.floor_plan_page = 0 # counter

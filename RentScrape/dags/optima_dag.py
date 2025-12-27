@@ -3,25 +3,22 @@ import datetime
 import os
 
 from RentScrape.RentScrape.loaders.load import Loader
-from RentScrape.RentScrape.transformers.wolf_point_east_transform import WolfPointEastTransform
-
-
+from RentScrape.RentScrape.transformers.optima_transform import OptimaTransform
 
 def dag(crawl: bool, tl: bool):
     # Extract
     if crawl:
-        os.system("cd RentScrape; scrapy crawl WolfPointEast")
+        os.system("cd RentScrape; scrapy crawl Optima")
 
     if tl:
         # Transform
-        transformer = WolfPointEastTransform()
-        units, floorplans = transformer.grab_files()
-
+        transformer = OptimaTransform()
+        units, floorplans = transformer.transform()
 
         # Load
-        result_path = f"{os.getcwd()}/RentScrape/result/wolf_point_east/{datetime.datetime.now().strftime('%Y-%m-%d')}"
+        result_path = f"{os.getcwd()}/RentScrape/result/optima/{datetime.datetime.now().strftime('%Y-%m-%d')}"
         if not os.path.exists(result_path):
-                os.mkdir(result_path)
+            os.mkdir(result_path)
 
         loader = Loader()
         loader.load(f"{result_path}/units.csv", units)
