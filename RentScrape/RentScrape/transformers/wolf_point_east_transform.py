@@ -24,15 +24,20 @@ class WolfPointEastTransform:
             number = unit.xpath('.//h2[span]/span/text()').get()
             floorplan = unit.xpath('.//h3[span]/span/text()').get()
             infos = unit.xpath('.//li[span]/span/text()').getall()
-            price = infos[0].strip()
-            available = infos[1].strip()
+            if len(infos) < 2:
+                available = infos[0].strip()
+                price = ""
+            else:
+                price = infos[0].strip()
+                available = infos[1].strip()
 
             unit_details.append({
                 'unit_number': number,
                 'as_of': datetime.date.today(),
                 'floorplan': floorplan,
                 'price': price,
-                'date_available': available
+                'date_available': available,
+                'building': 'Wolf Point East'
             })
         return pd.DataFrame(unit_details)
 
@@ -55,6 +60,7 @@ class WolfPointEastTransform:
                 'beds': beds, 
                 'baths': baths,
                 'size': size,
-                'img_path': img
+                'img_path': img,
+                'building': 'Wolf Point East'
                 })
         return pd.DataFrame(floor_plan_details)

@@ -1,7 +1,7 @@
 import argparse
 import datetime
 import os
-from RentScrape.RentScrape.loaders.load import Loader
+from RentScrape.RentScrape.loaders.csv_load import CsvLoader
 from RentScrape.RentScrape.transformers.onechicago_transform import OneChicagoTransform
 
 
@@ -20,7 +20,7 @@ def dag(crawl: bool, tl: bool):
         if not os.path.exists(result_path):
             os.mkdir(result_path)
 
-        loader = Loader()
+        loader = CsvLoader()
         loader.load(f"{result_path}/units.csv",units)
         loader.load(f"{result_path}/floorplans.csv", floorplans)
 

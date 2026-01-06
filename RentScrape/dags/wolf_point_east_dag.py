@@ -2,7 +2,10 @@ import argparse
 import datetime
 import os
 
-from RentScrape.RentScrape.loaders.load import Loader
+from sqlalchemy import create_engine
+
+from RentScrape.RentScrape.loaders.csv_load import CsvLoader
+from RentScrape.RentScrape.loaders.postgres_load import PostgresLoader
 from RentScrape.RentScrape.transformers.wolf_point_east_transform import WolfPointEastTransform
 
 
@@ -23,9 +26,14 @@ def dag(crawl: bool, tl: bool):
         if not os.path.exists(result_path):
                 os.mkdir(result_path)
 
-        loader = Loader()
+        loader = CsvLoader()
         loader.load(f"{result_path}/units.csv", units)
         loader.load(f"{result_path}/floorplans.csv", floorplans)
+
+        engine = create_engine("postgresql://kaining:mypassword@localhost:5432/rentscrapedb")
+        loader = PostgresLoader(engine)
+        loader.load("floorplans", floorplans)
+        loader.load("units", units)
 
 
 if __name__=="__main__":
