@@ -13,8 +13,9 @@ class OneElevenTransform:
         files = [file.path for file in os.scandir(self.drop_path) if file.is_file()]
         floorplan_files = [file for file in files if "floorplan" in file]
         floorplans_df = pd.concat([self.transform_floorplans(fp) for fp in floorplan_files])
-        units_df = floorplans_df[["image_url", "room_number", "price", "status"]]
-        floorplans_df = floorplans_df.drop(["room_number", "price", "status"], axis=1)
+        units_df = floorplans_df[["unit_number", "floorplan", "price", "date_available", "building"]]
+        units_df["as_of"] = datetime.date.today()
+        floorplans_df = floorplans_df.drop(["unit_number", "floorplan", "price", "date_available"], axis=1)
         floorplans_df = floorplans_df.drop_duplicates()
         return [units_df, floorplans_df]
     
@@ -35,13 +36,16 @@ class OneElevenTransform:
     
 
             floor_plan_details.append({
-                "room_number": room_number,
-                "image_url": image_url,
+                "name": image_url,
+                "beds": bed,
+                "baths": bath,
+                "size": square_ft,
+                "img_path": image_url,
+                "building": "OneEleven",
+                "unit_number": room_number,
+                "floorplan": image_url,
                 "price": price,
-                "square_ft": square_ft,
-                "bed": bed,
-                "bath": bath,
-                "status": status
+                "date_available": status,
             })
         floorplans_df = pd.DataFrame(floor_plan_details)
         return floorplans_df

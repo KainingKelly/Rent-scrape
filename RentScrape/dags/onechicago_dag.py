@@ -1,7 +1,10 @@
 import argparse
 import datetime
 import os
+
+from sqlalchemy import create_engine
 from RentScrape.RentScrape.loaders.csv_load import CsvLoader
+from RentScrape.RentScrape.loaders.postgres_load import PostgresLoader
 from RentScrape.RentScrape.transformers.onechicago_transform import OneChicagoTransform
 
 
@@ -23,6 +26,11 @@ def dag(crawl: bool, tl: bool):
         loader = CsvLoader()
         loader.load(f"{result_path}/units.csv",units)
         loader.load(f"{result_path}/floorplans.csv", floorplans)
+
+        engine = create_engine("postgresql://kaining:mypassword@localhost:5432/rentscrapedb")
+        loader = PostgresLoader(engine)
+        loader.load("floorplans", floorplans)
+        loader.load("units", units)
 
 
 if __name__=="__main__":
