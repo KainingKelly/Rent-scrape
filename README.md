@@ -33,8 +33,8 @@ Orchestrate: Run recurring jobs via DAGs to build a longitudinal dataset
 
 ## Project Structure
 .
-├── RentScrape/
-│   ├── loaders/            # Data sinks (e.g., CSV writer, DB writer)
+├── RentScrape/\n
+│   ├── loaders/            # Data sinks (e.g., CSV writer, DB writer)\n
 │   ├── spiders/            # Scrapy spiders: request + parse listing data
 │   ├── transformers/       # Field normalization / schema standardization
 │   ├── __init__.py
