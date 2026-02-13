@@ -32,7 +32,7 @@ Load: Persist snapshot data to storage (CSV and/or database)
 Orchestrate: Run recurring jobs via DAGs to build a longitudinal dataset
 
 ## Project Structure
-
+![Image](https://github.com/user-attachments/assets/2290d8e7-9b0a-4619-87b9-a67ae4870f0d)
 
 ## Using the Project Yourself
 ### Data Model
