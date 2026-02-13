@@ -32,29 +32,7 @@ Load: Persist snapshot data to storage (CSV and/or database)
 Orchestrate: Run recurring jobs via DAGs to build a longitudinal dataset
 
 ## Project Structure
-.
-├── RentScrape/\n
-│   ├── loaders/            # Data sinks (e.g., CSV writer, DB writer)\n
-│   ├── spiders/            # Scrapy spiders: request + parse listing data
-│   ├── transformers/       # Field normalization / schema standardization
-│   ├── __init__.py
-│   ├── items.py            # Scrapy Items (record schema)
-│   ├── middlewares.py      # Scrapy downloader/spider middlewares
-│   ├── pipelines.py        # Scrapy pipelines (post-processing + persistence hooks)
-│   └── settings.py         # Scrapy project settings
-│
-├── dags/                   # Scheduled workflow definitions (e.g., Airflow DAGs)
-├── models/                 # Database models / schema definitions
-│   ├── __init__.py
-│   └── db.py               # DB connection/session utilities
-│
-├── scrapy.cfg              # Scrapy config entry
-├── docker-compose.yaml     # Local infra (e.g., DB service) for development
-├── Pipfile                 # Python dependencies (pipenv)
-├── Pipfile.lock
-├── pyproject.toml          # Tooling config (formatters, linters, build metadata)
-├── __init__.py
-└── .gitignore
+
 
 ## Using the Project Yourself
 ### Data Model
