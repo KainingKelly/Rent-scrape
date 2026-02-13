@@ -49,6 +49,6 @@ Each run produces a full snapshot of units currently listed. Historical analysis
 
 ### Setup
 1. Clone the repo
-2. Run ```pipenv install -r requirements.txt``` then ```pipenv shell (note: requires pipenv be installed first)
+2. Run ```pipenv install -r requirements.txt``` then ```pipenv shell ```(note: requires pipenv be installed first)
 3. In the terminal, change directory to be in RentScrape
-4. Run ```python dags/{building dag}.py --crawl --tl
+4. Run ```python dags/{building dag}.py --crawl --tl```
